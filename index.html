@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link
+      rel="stylesheet"
+      href="style.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <title>Weather</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="cities">
+        <div>
+          <select
+            name="cities"
+            id="cities"
+            v-model="city"
+          >
+            <option
+              v-for="cty in cities"
+              :value="cty"
+            >
+              {{cty}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="container">
+        <div class="video">
+          <video
+            id="bgVideo"
+            autoplay
+            loop
+            muted
+            :src="bgvideo+iconCode+'.mp4'"
+          ></video>
+        </div>
+      </div>
+      <div class="container">
+        <div class="flex outer"></div>
+        <div class="container">
+          <div class="flex inner"></div>
+        </div>
+        <div class="container">
+          <div class="details">
+            <div class="degree">
+              <h1><strong>{{ data?.current?.temp_c }}</strong>&deg;</h1>
+              <h5>
+                Feels like <strong>{{data?.current?.feelslike_c}}&deg;</strong>
+              </h5>
+            </div>
+            <div class="middle">
+              <div class="item min">
+                <h6>Min <strong>6&deg;</strong></h6>
+                <hr />
+                <h6>Humidity</h6>
+                <h6><strong>{{data?.current?.humidity}}</strong></h6>
+              </div>
+              <div class="item image">
+                <img
+                  :src="icon"
+                  height="150px"
+                />
+              </div>
+              <div class="item max">
+                <h6>Max <strong>12&deg;</strong></h6>
+                <hr />
+                <h6>Pressure</h6>
+                <h6><strong>{{data?.current?.pressure_in}}</strong></h6>
+              </div>
+            </div>
+            <div class="bottom">
+              <h5>{{city}}</h5>
+              <h3>{{data?.current?.condition?.text}}</h3>
+              <h6>
+                {{data?.current?.wind_dir}} wind
+                <strong>{{data?.current?.wind_kph}} k/h</strong>
+              </h6>
+              <hr />
+              <span>
+                {{moment(data?.location?.localtime).format('hh:mm')}}
+                <strong class="date">
+                  {{moment(data?.location?.localtime).format('ddd')}}</strong
+                >
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="moment.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
