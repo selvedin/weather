@@ -68,6 +68,8 @@ const app = new Vue({
       let icon = this.data.current.condition.icon;
       icon = icon.substr(icon.length - 7);
       this.iconCode = icon.substr(0, 3);
+      if (["389"].includes(this.iconCode)) icon = "200.png";
+      if (["389", "302", "266"].includes(this.iconCode)) this.iconCode = "266"; // rain codes
       this.icon = "files/icons/" + icon;
     },
     city: function () {
